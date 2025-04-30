@@ -1,144 +1,436 @@
-    <!-- Weekly Calendar Section -->
-    <section id="calendar" class="bg-white py-10">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradoxia Earthquake Response - Coordination Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1500x500');
+            background-size: cover;
+            background-position: center;
+        }
+        .cluster-card {
+            transition: all 0.3s ease;
+        }
+        .cluster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        #map-placeholder {
+            width: 100%;
+            height: 500px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .resource-link {
+            transition: all 0.2s ease;
+        }
+        .resource-link:hover {
+            transform: translateX(5px);
+        }
+        .section-header {
+            border-bottom: 2px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://via.placeholder.com/50" alt="OCHA Logo" class="h-10 mr-3">
+                    <span class="font-bold text-xl">Paradoxia Earthquake Response</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#overview" class="hover:underline">Overview</a>
+                    <a href="#clusters" class="hover:underline">Clusters</a>
+                    <a href="#calendar" class="hover:underline">Calendar</a>
+                    <a href="#resources" class="hover:underline">Resources</a>
+                    <a href="#situation" class="hover:underline">Situation Reports</a>
+                    <a href="#contacts" class="hover:underline">Contacts</a>
+                    <a href="#structure" class="hover:underline">Response Structure</a>
+                    <a href="#assessments" class="hover:underline">Assessments</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Alert Banner -->
+    <div class="hero py-12 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">Paradoxia Earthquake Response</h1>
+            <p class="text-xl mb-6">Coordination Portal for the April 27, 2025 Earthquake Response</p>
+            <div class="bg-red-600 text-white p-4 rounded-lg inline-block mb-6">
+                <span class="font-bold">LATEST UPDATE:</span> Emergency Response Fund ($18M) - Concept papers due 10:00 AM, April 30
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://raw.githubusercontent.com/unocha/paradoxia-response/main/flash-appeal-2025.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition" download="Paradoxia-Flash-Appeal-2025.pdf">
+                    <i class="fas fa-file-pdf mr-2"></i> Flash Appeal
+                </a>
+                <a href="mailto:unocha.paradoxian@gmail.com" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg transition">
+                    <i class="fas fa-headset mr-2"></i> Contact OCHA
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Figures -->
+    <div class="py-10 bg-white shadow-md">
         <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Coordination Calendar</h2>
-            
-            <div class="bg-gray-50 p-6 rounded-lg border shadow-sm mb-8">
-                <div class="mb-4 flex flex-wrap justify-between items-center">
-                    <h3 class="text-xl font-bold text-gray-800">Week of April 28 - May 4, 2025</h3>
-                    <div class="flex space-x-2">
-                        <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm">Previous Week</button>
-                        <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm">Next Week</button>
-                        <a href="#" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm"><i class="far fa-calendar-alt mr-1"></i> Subscribe</a>
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Key Figures</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
+                <div class="p-4 border rounded-lg bg-red-50 border-red-200">
+                    <p class="text-4xl font-bold text-red-600">11,000</p>
+                    <p class="text-gray-600">Estimated Deaths</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-orange-50 border-orange-200">
+                    <p class="text-4xl font-bold text-orange-600">20,000+</p>
+                    <p class="text-gray-600">Injured</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-yellow-50 border-yellow-200">
+                    <p class="text-4xl font-bold text-yellow-600">600,000</p>
+                    <p class="text-gray-600">Homeless</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-blue-50 border-blue-200">
+                    <p class="text-4xl font-bold text-blue-600">2.1M</p>
+                    <p class="text-gray-600">Affected People</p>
+                </div>
+                <div class="p-4 border rounded-lg bg-green-50 border-green-200">
+                    <p class="text-4xl font-bold text-green-600">$78.6M</p>
+                    <p class="text-gray-600">Funding Required</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Content Column -->
+            <div class="lg:col-span-2">
+                <!-- Overview Section -->
+                <section id="overview" class="mb-12">
+                    <h2 class="text-2xl font-bold mb-4 section-header text-gray-800">Emergency Overview</h2>
+                    <p class="mb-4 text-gray-700">
+                        On April 27, 2025, at 21:45 local time, a 6.5 magnitude earthquake struck Paradoxia, with the epicenter located 20km offshore from the southwestern coast. The earthquake, combined with tsunami waves, has caused widespread devastation across southwestern coastal regions and mountainous areas.
+                    </p>
+                    <p class="mb-4 text-gray-700">
+                        Current estimates indicate 11,000 deaths, 20,000+ injuries, and 600,000 people left homeless. Critical infrastructure including health facilities, schools, roads, and water systems have been severely damaged. Approximately 2.1 million people require urgent humanitarian assistance.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-bold text-blue-800">Priority Areas:</p>
+                        <ul class="list-disc ml-5 text-gray-700">
+                            <li>Southwestern coastal regions (epicenter area)</li>
+                            <li>Southern mountain areas with landslides</li>
+                            <li>Four refugee camps (A1-A4) in the southeast</li>
+                            <li>Areas with damaged petrol storage facilities</li>
+                        </ul>
                     </div>
+                </section>
+    
+    <!-- Contact Section -->
+    <section id="contacts" class="bg-gray-100 py-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Key Contacts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">OCHA Coordination</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:unocha.paradoxian@gmail.com" class="text-blue-600 hover:underline">unocha.paradoxian@gmail.com</a></p>
+                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
                 </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Time</th>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Monday<br/>Apr 28</th>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Tuesday<br/>Apr 29</th>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Wednesday<br/>Apr 30</th>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Thursday<br/>May 1</th>
-                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Friday<br/>May 2</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">09:00-10:30</td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-purple-100 p-1 rounded border border-purple-300">
-                                        <p class="font-semibold text-purple-800">ICCG Meeting</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-blue-100 p-1 rounded border border-blue-300">
-                                        <p class="font-semibold text-blue-800">WASH Cluster</p>
-                                        <p class="text-gray-600">IFRC Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-yellow-100 p-1 rounded border border-yellow-300">
-                                        <p class="font-semibold text-yellow-800">Food Security</p>
-                                        <p class="text-gray-600">Sustain Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-green-100 p-1 rounded border border-green-300">
-                                        <p class="font-semibold text-green-800">Education Cluster</p>
-                                        <p class="text-gray-600">Shelterall Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-red-100 p-1 rounded border border-red-300">
-                                        <p class="font-semibold text-red-800">Civil-Military Coord.</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">11:00-12:30</td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-pink-100 p-1 rounded border border-pink-300">
-                                        <p class="font-semibold text-pink-800">Gender Cluster</p>
-                                        <p class="text-gray-600">Sustain Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-yellow-200 p-1 rounded border border-yellow-400">
-                                        <p class="font-semibold text-yellow-900">ERF Presentation</p>
-                                        <p class="text-gray-600">Ministry TOT&IDPs</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-gray-100 p-1 rounded border border-gray-300">
-                                        <p class="font-semibold text-gray-800">Information Mgmt WG</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">14:00-15:30</td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-gray-100 p-1 rounded border border-gray-300">
-                                        <p class="font-semibold text-gray-800">Govt Coordination</p>
-                                        <p class="text-gray-600">Ministry TOT&IDPs</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-purple-100 p-1 rounded border border-purple-300">
-                                        <p class="font-semibold text-purple-800">Camp Management</p>
-                                        <p class="text-gray-600">Shelterall Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-indigo-100 p-1 rounded border border-indigo-300">
-                                        <p class="font-semibold text-indigo-800">Access Working Group</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">16:00-17:30</td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-orange-100 p-1 rounded border border-orange-300">
-                                        <p class="font-semibold text-orange-800">HCT Meeting</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-orange-100 p-1 rounded border border-orange-300">
-                                        <p class="font-semibold text-orange-800">HCT Meeting</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                                <td class="py-2 px-3 border text-xs text-gray-700">
-                                    <div class="bg-blue-100 p-1 rounded border border-blue-300">
-                                        <p class="font-semibold text-blue-800">Donor Briefing</p>
-                                        <p class="text-gray-600">OCHA Office</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">ERF Management</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:unparadoxia@gmail.com" class="text-blue-600 hover:underline">unparadoxia@gmail.com</a></p>
+                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
                 </div>
-                
-                <div class="mt-4">
-                    <a href="#" class="text-blue-600 hover:underline text-sm"><i class="fas fa-calendar-alt mr-1"></i> View full coordination calendar</a> | 
-                    <a href="#" class="text-blue-600 hover:underline text-sm"><i class="fas fa-download mr-1"></i> Download as iCal</a>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Ministry of TOT&IDPs</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:ministry-toti@paradoxia.gov.pr" class="text-blue-600 hover:underline">ministry-toti@paradoxia.gov.pr</a></p>
+                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mt-8 mb-4 text-center text-gray-800">Cluster Contacts</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">WASH Cluster</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> IFRC</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Aix</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:ifrc.paradoxia.org@gmail.com" class="text-blue-600 hover:underline">ifrc.paradoxia.org@gmail.com</a></p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Education Cluster</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Shelterall</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Lilith</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:shelterall.org@gmail.com" class="text-blue-600 hover:underline">shelterall.org@gmail.com</a></p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Camp Management Cluster</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Shelterall</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Sundus</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:shelterall.org@gmail.com" class="text-blue-600 hover:underline">shelterall.org@gmail.com</a></p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Gender Cluster</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Sustain</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Gracie</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:sustain.globalnet@gmail.com" class="text-blue-600 hover:underline">sustain.globalnet@gmail.com</a></p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Food Security & Livelihoods</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Sustain</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Tom</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:sustain.globalnet@gmail.com" class="text-blue-600 hover:underline">sustain.globalnet@gmail.com</a></p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-gray-800 mb-2">Logistics Cluster</h3>
+                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agencies:</span> IFRC + WFP + UNOCHA</p>
+                    <p class="text-sm mb-1"><span class="font-semibold">Status:</span> To be created</p>
+                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="#" class="text-blue-600 hover:underline">TBD</a></p>
                 </div>
             </div>
         </div>
     </section>
+    
+    <!-- Response Structure Section -->
+    <section id="structure" class="bg-white py-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Response Structure</h2>
+            
+            <div class="mb-6">
+                <img src="https://via.placeholder.com/1200x800" alt="Response Structure Org Chart" class="w-full rounded-lg shadow-md mb-4">
+                <div class="text-center">
+                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition text-sm">
+                        <i class="fas fa-download mr-1"></i> Download Organization Chart (PDF)
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border shadow-sm">
+                <h3 class="font-bold text-lg mb-3 text-gray-800">Coordination Structure</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">Strategic Coordination</h4>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>UN Paradoxia (Overall Leadership)</li>
+                            <li>UNOCHA Paradoxia (Operational Coordination)</li>
+                            <li>Humanitarian Country Team</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">Operational Coordination</h4>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>National Intercluster Coordination Group (Lead: UNOCHA)</li>
+                            <li>Ministry of TOT&IDPs Working Group (Lead: UNOCHA)</li>
+                            <li>Humanitarian Funds Working Group (Lead: UNOCHA)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">Technical Working Groups</h4>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Advocacy and Communications Working Group (Lead: UNOCHA)</li>
+                            <li>Humanitarian Community Access Working Group (Lead: UNOCHA)</li>
+                            <li>Military Relations Coordination Working Group (Lead: UNOCHA)</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">Active Clusters</h4>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>WASH Cluster (Lead: IFRC, Contact: Aix)</li>
+                            <li>Education Cluster (Lead: Shelterall, Contact: Lilith)</li>
+                            <li>Camp Management Cluster (Lead: Shelterall, Contact: Sundus)</li>
+                            <li>Gender Cluster (Lead: Sustain, Contact: Gracie)</li>
+                            <li>Food Security & Livelihoods Cluster (Lead: Sustain, Contact: Tom)</li>
+                            <li>Logistics Cluster - To Be Created (Lead: IFRC + WFP + UNOCHA)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="https://via.placeholder.com/150x50" alt="UN OCHA" class="h-10">
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">© 2025 UN OCHA - Paradoxia Earthquake Response</p>
+                    <p class="text-sm">Last updated: April 29, 2025, 18:00 local time</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Placeholder for map initialization
+        // In a real implementation, this would initialize a Leaflet or similar map with 3W data
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Map would initialize here in a real implementation');
+        });
+    </script>
+</body>
+</html>
+    
+    <!-- M&E Forms Section -->
+    <section id="me-forms" class="bg-white py-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Monitoring & Evaluation Forms</h2>
+            
+            <div class="bg-gray-50 p-6 rounded-lg border shadow-sm mb-8">
+                <p class="text-gray-700 mb-4">These standardized M&E forms are designed for consistent data collection across all clusters. All partners are required to use these forms for reporting. Forms are available both online and in offline formats.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- WASH M&E Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-tint text-blue-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">WASH Cluster</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For monitoring water, sanitation, and hygiene interventions</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUNjFYRUYzMFo0VEpSUFM0S0ozTjVNUjVPTy4u" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Gender M&E Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-pink-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-venus-mars text-pink-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Gender Cluster</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For monitoring gender-specific aspects of response</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUQlBaVEc3MFhCMFc0QkFRQkMyRkVOSjlUSi4u" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Food Security M&E Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-utensils text-yellow-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Livelihoods & Food Security</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For monitoring food security and livelihoods</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUMFdVTjFNTUZXVjFGWDFUVkJDNUNMSUYyUi4u" target="_blank" class="bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Coordination Meeting Report Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-gray-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-users text-gray-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Coordination Meeting Report</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For documenting cluster coordination meetings</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUOVo3WFJNM09JN0NYNTdUVkdVQk9IMUpLNy4u" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <a href="#" class="text-blue-600 hover:underline font-semibold">View guidance on completing M&E forms</a>
+                </div>
+            </div>
+        </div>
+    </section>
+                    
+                    <!-- Education M&E Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-green-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-school text-green-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Education Cluster</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For monitoring education facilities and interventions</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUNjFZM1BQUjdXNlJKVUU1QjFTRlk1RDM0VC4u" target="_blank" class="bg-green-600 hover:bg-green-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Camp Management M&E Form -->
+                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-campground text-purple-600"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">Camp Management</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">For monitoring conditions in displacement sites</p>
+                        <div class="flex space-x-2">
+                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUOUoxWE9VNkhXS0IyVFBRU1laTFpTTjJZRS4u" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-globe mr-1"></i> Online Form
+                            </a>
+                            <a href="#" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
+                                <i class="fas fa-download mr-1"></i> Offline (XLS)
+                            </a>
+                
     
     <!-- Assessment & IM Section -->
     <section id="assessments" class="bg-gray-50 py-10">
@@ -315,276 +607,7 @@
                 </div>
             </div>
         </div>
-    </section>    <!-- M&E Forms Section -->
-    <section id="me-forms" class="bg-white py-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Monitoring & Evaluation Forms</h2>
-            
-            <div class="bg-gray-50 p-6 rounded-lg border shadow-sm mb-8">
-                <p class="text-gray-700 mb-4">These standardized M&E forms are designed for consistent data collection across all clusters. All partners are required to use these forms for reporting. Forms are available both online and in offline formats.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- WASH M&E Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-blue-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-tint text-blue-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">WASH Cluster</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For monitoring water, sanitation, and hygiene interventions</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUNjFYRUYzMFo0VEpSUFM0S0ozTjVNUjVPTy4u" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Education M&E Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-green-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-school text-green-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Education Cluster</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For monitoring education facilities and interventions</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUNjFZM1BQUjdXNlJKVUU1QjFTRlk1RDM0VC4u" target="_blank" class="bg-green-600 hover:bg-green-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-green-100 hover:bg-green-200 text-green-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Camp Management M&E Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-purple-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-campground text-purple-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Camp Management</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For monitoring conditions in displacement sites</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUOUoxWE9VNkhXS0IyVFBRU1laTFpTTjJZRS4u" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Gender M&E Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-pink-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-venus-mars text-pink-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Gender Cluster</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For monitoring gender-specific aspects of response</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUQlBaVEc3MFhCMFc0QkFRQkMyRkVOSjlUSi4u" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Food Security M&E Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-yellow-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-utensils text-yellow-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Livelihoods & Food Security</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For monitoring food security and livelihoods</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUMFdVTjFNTUZXVjFGWDFUVkJDNUNMSUYyUi4u" target="_blank" class="bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Coordination Meeting Report Form -->
-                    <div class="bg-white p-5 rounded-lg border shadow-sm hover:shadow-md transition">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-gray-100 p-2 rounded-full mr-3">
-                                <i class="fas fa-users text-gray-600"></i>
-                            </div>
-                            <h3 class="font-bold text-gray-800">Coordination Meeting Report</h3>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-4">For documenting cluster coordination meetings</p>
-                        <div class="flex space-x-2">
-                            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAABqTNJBUOVo3WFJNM09JN0NYNTdUVkdVQk9IMUpLNy4u" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-globe mr-1"></i> Online Form
-                            </a>
-                            <a href="#" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-bold py-2 px-3 rounded transition flex-1 text-center">
-                                <i class="fas fa-download mr-1"></i> Offline (XLS)
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 text-center">
-                    <a href="#" class="text-blue-600 hover:underline font-semibold">View guidance on completing M&E forms</a>
-                </div>
-            </div>
-        </div>
-    </section><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paradoxia Earthquake Response - Coordination Portal</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1500x500');
-            background-size: cover;
-            background-position: center;
-        }
-        .cluster-card {
-            transition: all 0.3s ease;
-        }
-        .cluster-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        #map-placeholder {
-            width: 100%;
-            height: 500px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .resource-link {
-            transition: all 0.2s ease;
-        }
-        .resource-link:hover {
-            transform: translateX(5px);
-        }
-        .section-header {
-            border-bottom: 2px solid #3B82F6;
-            padding-bottom: 0.5rem;
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-blue-600 text-white shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <img src="https://via.placeholder.com/50" alt="OCHA Logo" class="h-10 mr-3">
-                    <span class="font-bold text-xl">Paradoxia Earthquake Response</span>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#overview" class="hover:underline">Overview</a>
-                    <a href="#clusters" class="hover:underline">Clusters</a>
-                    <a href="#calendar" class="hover:underline">Calendar</a>
-                    <a href="#resources" class="hover:underline">Resources</a>
-                    <a href="#situation" class="hover:underline">Situation Reports</a>
-                    <a href="#contacts" class="hover:underline">Contacts</a>
-                    <a href="#structure" class="hover:underline">Response Structure</a>
-                    <a href="#assessments" class="hover:underline">Assessments</a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-white focus:outline-none">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero / Alert Banner -->
-    <div class="hero py-12 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl font-bold mb-4">Paradoxia Earthquake Response</h1>
-            <p class="text-xl mb-6">Coordination Portal for the April 27, 2025 Earthquake Response</p>
-            <div class="bg-red-600 text-white p-4 rounded-lg inline-block mb-6">
-                <span class="font-bold">LATEST UPDATE:</span> Emergency Response Fund ($18M) - Concept papers due 10:00 AM, April 30
-            </div>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://raw.githubusercontent.com/unocha/paradoxia-response/main/flash-appeal-2025.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition" download="Paradoxia-Flash-Appeal-2025.pdf">
-                    <i class="fas fa-file-pdf mr-2"></i> Flash Appeal
-                </a>
-                <a href="mailto:unocha.paradoxian@gmail.com" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg transition">
-                    <i class="fas fa-headset mr-2"></i> Contact OCHA
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Key Figures -->
-    <div class="py-10 bg-white shadow-md">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Key Figures</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
-                <div class="p-4 border rounded-lg bg-red-50 border-red-200">
-                    <p class="text-4xl font-bold text-red-600">11,000</p>
-                    <p class="text-gray-600">Estimated Deaths</p>
-                </div>
-                <div class="p-4 border rounded-lg bg-orange-50 border-orange-200">
-                    <p class="text-4xl font-bold text-orange-600">20,000+</p>
-                    <p class="text-gray-600">Injured</p>
-                </div>
-                <div class="p-4 border rounded-lg bg-yellow-50 border-yellow-200">
-                    <p class="text-4xl font-bold text-yellow-600">600,000</p>
-                    <p class="text-gray-600">Homeless</p>
-                </div>
-                <div class="p-4 border rounded-lg bg-blue-50 border-blue-200">
-                    <p class="text-4xl font-bold text-blue-600">2.1M</p>
-                    <p class="text-gray-600">Affected People</p>
-                </div>
-                <div class="p-4 border rounded-lg bg-green-50 border-green-200">
-                    <p class="text-4xl font-bold text-green-600">$78.6M</p>
-                    <p class="text-gray-600">Funding Required</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Main Content Column -->
-            <div class="lg:col-span-2">
-                <!-- Overview Section -->
-                <section id="overview" class="mb-12">
-                    <h2 class="text-2xl font-bold mb-4 section-header text-gray-800">Emergency Overview</h2>
-                    <p class="mb-4 text-gray-700">
-                        On April 27, 2025, at 21:45 local time, a 6.5 magnitude earthquake struck Paradoxia, with the epicenter located 20km offshore from the southwestern coast. The earthquake, combined with tsunami waves, has caused widespread devastation across southwestern coastal regions and mountainous areas.
-                    </p>
-                    <p class="mb-4 text-gray-700">
-                        Current estimates indicate 11,000 deaths, 20,000+ injuries, and 600,000 people left homeless. Critical infrastructure including health facilities, schools, roads, and water systems have been severely damaged. Approximately 2.1 million people require urgent humanitarian assistance.
-                    </p>
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-                        <p class="font-bold text-blue-800">Priority Areas:</p>
-                        <ul class="list-disc ml-5 text-gray-700">
-                            <li>Southwestern coastal regions (epicenter area)</li>
-                            <li>Southern mountain areas with landslides</li>
-                            <li>Four refugee camps (A1-A4) in the southeast</li>
-                            <li>Areas with damaged petrol storage facilities</li>
-                        </ul>
-                    </div>
-                </section>
+    </section>
 
                 <!-- Operational Presence Map -->
                 <section id="map" class="mb-12">
@@ -602,7 +625,7 @@
                 <section id="clusters" class="mb-12">
                     <h2 class="text-2xl font-bold mb-4 section-header text-gray-800">Cluster Response</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                <!-- WASH Cluster -->
+                        <!-- WASH Cluster -->
                         <div class="cluster-card border rounded-lg p-4 bg-white shadow-sm hover:shadow-md">
                             <div class="flex items-center mb-3">
                                 <div class="bg-blue-100 p-2 rounded-full mr-3">
@@ -785,7 +808,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <a href="#" class="text-blue-600 hover:underline text-sm">View full meeting calendar</a>
+                        <a href="#calendar" class="text-blue-600 hover:underline text-sm">View full meeting calendar</a>
                     </div>
                 </div>
 
@@ -877,164 +900,144 @@
         </div>
     </div>
 
-    <!-- Contact Section -->
-    <section id="contacts" class="bg-gray-100 py-10">
+    <!-- Weekly Calendar Section -->
+    <section id="calendar" class="bg-white py-10">
         <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Key Contacts</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">OCHA Coordination</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:unocha.paradoxian@gmail.com" class="text-blue-600 hover:underline">unocha.paradoxian@gmail.com</a></p>
-                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">ERF Management</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:unparadoxia@gmail.com" class="text-blue-600 hover:underline">unparadoxia@gmail.com</a></p>
-                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Ministry of TOT&IDPs</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Email:</span> <a href="mailto:ministry-toti@paradoxia.gov.pr" class="text-blue-600 hover:underline">ministry-toti@paradoxia.gov.pr</a></p>
-                    <p class="text-sm"><span class="font-semibold">Phone:</span> +XX XXX XXX XXXX</p>
-                </div>
-            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Coordination Calendar</h2>
             
-            <h3 class="text-xl font-bold mt-8 mb-4 text-center text-gray-800">Cluster Contacts</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">WASH Cluster</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> IFRC</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Aix</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:ifrc.paradoxia.org@gmail.com" class="text-blue-600 hover:underline">ifrc.paradoxia.org@gmail.com</a></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Education Cluster</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Shelterall</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Lilith</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:shelterall.org@gmail.com" class="text-blue-600 hover:underline">shelterall.org@gmail.com</a></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Camp Management Cluster</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Shelterall</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Sundus</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:shelterall.org@gmail.com" class="text-blue-600 hover:underline">shelterall.org@gmail.com</a></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Gender Cluster</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Sustain</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Gracie</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:sustain.globalnet@gmail.com" class="text-blue-600 hover:underline">sustain.globalnet@gmail.com</a></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Food Security & Livelihoods</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agency:</span> Sustain</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Contact Person:</span> Tom</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="mailto:sustain.globalnet@gmail.com" class="text-blue-600 hover:underline">sustain.globalnet@gmail.com</a></p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-2">Logistics Cluster</h3>
-                    <p class="text-sm mb-1"><span class="font-semibold">Lead Agencies:</span> IFRC + WFP + UNOCHA</p>
-                    <p class="text-sm mb-1"><span class="font-semibold">Status:</span> To be created</p>
-                    <p class="text-sm"><span class="font-semibold">Email:</span> <a href="#" class="text-blue-600 hover:underline">TBD</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Response Structure Section -->
-    <section id="structure" class="bg-white py-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Response Structure</h2>
-            
-            <div class="mb-6">
-                <img src="https://via.placeholder.com/1200x800" alt="Response Structure Org Chart" class="w-full rounded-lg shadow-md mb-4">
-                <div class="text-center">
-                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition text-sm">
-                        <i class="fas fa-download mr-1"></i> Download Organization Chart (PDF)
-                    </a>
-                </div>
-            </div>
-            
-            <div class="bg-gray-50 p-4 rounded-lg border shadow-sm">
-                <h3 class="font-bold text-lg mb-3 text-gray-800">Coordination Structure</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-2">Strategic Coordination</h4>
-                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
-                            <li>UN Paradoxia (Overall Leadership)</li>
-                            <li>UNOCHA Paradoxia (Operational Coordination)</li>
-                            <li>Humanitarian Country Team</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-2">Operational Coordination</h4>
-                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
-                            <li>National Intercluster Coordination Group (Lead: UNOCHA)</li>
-                            <li>Ministry of TOT&IDPs Working Group (Lead: UNOCHA)</li>
-                            <li>Humanitarian Funds Working Group (Lead: UNOCHA)</li>
-                        </ul>
+            <div class="bg-gray-50 p-6 rounded-lg border shadow-sm mb-8">
+                <div class="mb-4 flex flex-wrap justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-800">Week of April 28 - May 4, 2025</h3>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm">Next Week</button>
+                        <a href="#" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm"><i class="far fa-calendar-alt mr-1"></i> Subscribe</a>
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-2">Technical Working Groups</h4>
-                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
-                            <li>Advocacy and Communications Working Group (Lead: UNOCHA)</li>
-                            <li>Humanitarian Community Access Working Group (Lead: UNOCHA)</li>
-                            <li>Military Relations Coordination Working Group (Lead: UNOCHA)</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-blue-700 mb-2">Active Clusters</h4>
-                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
-                            <li>WASH Cluster (Lead: IFRC, Contact: Aix)</li>
-                            <li>Education Cluster (Lead: Shelterall, Contact: Lilith)</li>
-                            <li>Camp Management Cluster (Lead: Shelterall, Contact: Sundus)</li>
-                            <li>Gender Cluster (Lead: Sustain, Contact: Gracie)</li>
-                            <li>Food Security & Livelihoods Cluster (Lead: Sustain, Contact: Tom)</li>
-                            <li>Logistics Cluster - To Be Created (Lead: IFRC + WFP + UNOCHA)</li>
-                        </ul>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Time</th>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Monday<br/>Apr 28</th>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Tuesday<br/>Apr 29</th>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Wednesday<br/>Apr 30</th>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Thursday<br/>May 1</th>
+                                <th class="py-2 px-3 border bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Friday<br/>May 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">09:00-10:30</td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-purple-100 p-1 rounded border border-purple-300">
+                                        <p class="font-semibold text-purple-800">ICCG Meeting</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-blue-100 p-1 rounded border border-blue-300">
+                                        <p class="font-semibold text-blue-800">WASH Cluster</p>
+                                        <p class="text-gray-600">IFRC Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-yellow-100 p-1 rounded border border-yellow-300">
+                                        <p class="font-semibold text-yellow-800">Food Security</p>
+                                        <p class="text-gray-600">Sustain Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-green-100 p-1 rounded border border-green-300">
+                                        <p class="font-semibold text-green-800">Education Cluster</p>
+                                        <p class="text-gray-600">Shelterall Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-red-100 p-1 rounded border border-red-300">
+                                        <p class="font-semibold text-red-800">Civil-Military Coord.</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">11:00-12:30</td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-pink-100 p-1 rounded border border-pink-300">
+                                        <p class="font-semibold text-pink-800">Gender Cluster</p>
+                                        <p class="text-gray-600">Sustain Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-yellow-200 p-1 rounded border border-yellow-400">
+                                        <p class="font-semibold text-yellow-900">ERF Presentation</p>
+                                        <p class="text-gray-600">Ministry TOT&IDPs</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-gray-100 p-1 rounded border border-gray-300">
+                                        <p class="font-semibold text-gray-800">Information Mgmt WG</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">14:00-15:30</td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-gray-100 p-1 rounded border border-gray-300">
+                                        <p class="font-semibold text-gray-800">Govt Coordination</p>
+                                        <p class="text-gray-600">Ministry TOT&IDPs</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-purple-100 p-1 rounded border border-purple-300">
+                                        <p class="font-semibold text-purple-800">Camp Management</p>
+                                        <p class="text-gray-600">Shelterall Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-indigo-100 p-1 rounded border border-indigo-300">
+                                        <p class="font-semibold text-indigo-800">Access Working Group</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 border text-sm text-gray-700 bg-gray-50 font-semibold">16:00-17:30</td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-orange-100 p-1 rounded border border-orange-300">
+                                        <p class="font-semibold text-orange-800">HCT Meeting</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                                <td class="py-2 px-3 border text-xs text-gray-700"></td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-orange-100 p-1 rounded border border-orange-300">
+                                        <p class="font-semibold text-orange-800">HCT Meeting</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                                <td class="py-2 px-3 border text-xs text-gray-700">
+                                    <div class="bg-blue-100 p-1 rounded border border-blue-300">
+                                        <p class="font-semibold text-blue-800">Donor Briefing</p>
+                                        <p class="text-gray-600">OCHA Office</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="#" class="text-blue-600 hover:underline text-sm"><i class="fas fa-calendar-alt mr-1"></i> View full coordination calendar</a> | 
+                    <a href="#" class="text-blue-600 hover:underline text-sm"><i class="fas fa-download mr-1"></i> Download as iCal</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <img src="https://via.placeholder.com/150x50" alt="UN OCHA" class="h-10">
-                </div>
-                <div class="text-center md:text-right">
-                    <p class="text-sm mb-2">© 2025 UN OCHA - Paradoxia Earthquake Response</p>
-                    <p class="text-sm">Last updated: April 29, 2025, 18:00 local time</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Simple scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Placeholder for map initialization
-        // In a real implementation, this would initialize a Leaflet or similar map with 3W data
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Map would initialize here in a real implementation');
-        });
-    </script>
-</body>
-</html>
+    </section> text-blue-700 rounded hover:bg-blue-200 transition text-sm">Previous Week</button>
+                        <button class="px-3 py-1 bg-blue-100
